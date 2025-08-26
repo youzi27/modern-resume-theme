@@ -1,7 +1,17 @@
+<!-- 固定在页面顶部的导航栏 -->
+<nav class="navbar-fixed">
+  <ul>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
 <header class="site-header">
   <div class="container header-container">
     <div class="row">
-      <!-- 左侧：名字 + 标题 + 导航 -->
+      <!-- 左侧：名字 + 标题 -->
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-8 header-left">
         <h1>{{ site.name | escape }}</h1>
 
@@ -11,16 +21,6 @@
         {%- elsif site.title -%}
           <h2>{{ site.title | newline_to_br }}</h2>
         {%- endif -%}
-
-        <!-- 导航栏 -->
-        <nav class="navbar">
-          <ul>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#about">About</a></li>
-          </ul>
-        </nav>
       </div>
 
       <!-- 右侧：社交与联系方式 -->
@@ -66,9 +66,9 @@
   </div>
 </header>
 
-<!-- 平滑滚动 -->
+<!-- 平滑滚动效果 -->
 <script>
-  document.querySelectorAll('.navbar a').forEach(a => {
+  document.querySelectorAll('.navbar-fixed a').forEach(a => {
     a.addEventListener('click', e => {
       const to = document.querySelector(a.getAttribute('href'));
       if (to) {
@@ -79,27 +79,39 @@
   });
 </script>
 
+<!-- 样式：放到这里或者 main.scss -->
 <style>
-  .navbar {
+  .navbar-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background: #333;
-    padding: 10px;
-    margin-top: 10px;
+    z-index: 1000; /* 确保永远在最前 */
+    padding: 10px 0;
   }
-  .navbar ul {
+
+  .navbar-fixed ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     gap: 20px;
-    flex-wrap: wrap;
     justify-content: center;
   }
-  .navbar a {
+
+  .navbar-fixed a {
     color: #fff;
     text-decoration: none;
     font-weight: 600;
   }
-  .navbar a:hover {
+
+  .navbar-fixed a:hover {
     text-decoration: underline;
+  }
+
+  /* 避免内容被固定导航遮挡 */
+  body {
+    padding-top: 60px; /* 根据导航高度可调 */
   }
 </style>
